@@ -3,11 +3,11 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from todo import models
+from todo.models import Todo, Board
 
 
 class TodoInline(admin.TabularInline):
-    model = models.Todo
+    model = Todo
     extra = 0
     readonly_fields = (
         'created',
@@ -16,10 +16,10 @@ class TodoInline(admin.TabularInline):
 
 
 class BoardAdmin(admin.ModelAdmin):
-    model = models.Board
+    model = Board
     inlines = (
         TodoInline,
     )
 
 
-admin.site.register(models.Board, BoardAdmin)
+admin.site.register(Board, BoardAdmin)
