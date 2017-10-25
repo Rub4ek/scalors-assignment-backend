@@ -6,7 +6,7 @@ from rest_framework_nested import routers
 from reminder.views import ReminderViewSet
 from todo.views import BoardViewSet, TodoViewSet
 
-# TODO: Found a way to make work several routers with drf html renderer
+# TODO: Found a way to make work several routers with drf browser renderer
 root_router = routers.DefaultRouter()
 
 # To do routes
