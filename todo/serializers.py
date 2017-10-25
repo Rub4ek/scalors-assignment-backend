@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_nested.serializers import NestedHyperlinkedModelSerializer
 
-import models
+from todo.models import Todo, Board
 
 
 class TodoListSerializer(NestedHyperlinkedModelSerializer):
@@ -10,14 +10,14 @@ class TodoListSerializer(NestedHyperlinkedModelSerializer):
     }
 
     class Meta:
-        model = models.Todo
+        model = Todo
         fields = ('title', 'done', 'url',)
 
 
 class TodoDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Todo
+        model = Todo
         fields = ('title', 'done', 'created', 'updated',)
 
 
@@ -25,7 +25,7 @@ class BoardListSerializer(serializers.HyperlinkedModelSerializer):
     todo_count = serializers.SerializerMethodField()
 
     class Meta:
-        model = models.Board
+        model = Board
         fields = ('name', 'todo_count', 'url',)
 
     @staticmethod
@@ -38,5 +38,5 @@ class BoardDetailSerializer(serializers.ModelSerializer):
     todos_url = serializers.HyperlinkedIdentityField(view_name='todo-list', lookup_url_kwarg='board_pk')
 
     class Meta:
-        model = models.Board
+        model = Board
         fields = ('name', 'todos', 'todos_url',)
