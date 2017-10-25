@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # Apps
     'todo',
+    'reminder',
 ]
 
 MIDDLEWARE = [
