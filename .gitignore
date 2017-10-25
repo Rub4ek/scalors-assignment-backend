@@ -1,1 +1,8 @@
-*.html
+# IDE
+.idea/
+
+# Db
+*.sqlite3
+
+# Pyc
+*.pyc

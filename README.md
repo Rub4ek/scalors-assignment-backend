@@ -1,5 +1,23 @@
 # Backend Assignment: Simple Todos and Reminder API
 
+
+## Install
+
+    pip install -r requirements.txt
+    python manage.py migrate
+
+## Run
+
+    python manage.py createsuperuser
+    python manage.py runserver
+
+## Tests
+
+    python manage.py test
+
+
+## Info
+
 The assignment involves the creation of a TODO and Reminder REST JSON API using Django. Please use the following libraries and versions:
 
 * Python 2.7 (we are currently migrating to 3, but a lot of the code is still 2.7)
