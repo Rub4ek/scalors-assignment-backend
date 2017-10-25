@@ -3,17 +3,28 @@
 
 ## Install
 
+    sudo apt install redis-server
     pip install -r requirements.txt
     python manage.py migrate
 
 ## Run
 
+    celery -A greatesttodo worker -l info
     python manage.py createsuperuser
     python manage.py runserver
 
 ## Tests
 
     python manage.py test
+    
+## API URL structure
+
+`/api/boars/`
+`/api/boars/{id}/`
+`/api/boars/{board_id}/todos/?done=[true|false]`
+`/api/boars/{board_id}/todos/{id}/`
+`/api/reminders/`
+`/api/reminders/{id}/`
 
 
 ## Info
