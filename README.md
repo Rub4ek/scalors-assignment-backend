@@ -19,13 +19,13 @@
     
 ## API URL structure
 
-`/api/boars/`
+`/api/boards/`
 
-`/api/boars/{id}/`
+`/api/boadrs/{id}/`
 
-`/api/boars/{board_id}/todos/?done=[true|false]`
+`/api/boards/{board_id}/todos/?done=[true|false]`
 
-`/api/boars/{board_id}/todos/{id}/`
+`/api/boards/{board_id}/todos/{id}/`
 
 `/api/reminders/`
 
