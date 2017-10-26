@@ -9,7 +9,7 @@ from rest_framework.test import APITestCase
 from todo.models import Board, Todo
 
 
-class BoardsTests(APITestCase):
+class BoardsTestCase(APITestCase):
 
     def test_create_board(self):
         url = reverse('board-list')
@@ -44,14 +44,14 @@ class BoardsTests(APITestCase):
         url = reverse('board-detail', kwargs={'pk': board.pk})
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Board.objects.get().name, 'Test')
+        self.assertEqual(response.data.keys(), ['name', 'todos', 'todos_url'])
 
 
-class TodosTests(APITestCase):
+class TodosTestCase(APITestCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TodosTests, cls).setUpClass()
+        super(TodosTestCase, cls).setUpClass()
         cls.board = Board.objects.create(name='Test')
 
     def test_create_todo(self):
@@ -87,4 +87,4 @@ class TodosTests(APITestCase):
         url = reverse('todo-detail', kwargs={'board_pk': self.board.pk, 'pk': todo.pk})
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Todo.objects.get().title, 'Test')
+        self.assertEqual(response.data.keys(), ['title', 'done', 'created', 'updated'])

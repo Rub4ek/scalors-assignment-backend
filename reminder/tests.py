@@ -1,15 +1,37 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.test import TestCase
+from django.test import SimpleTestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
 from reminder.models import Reminder
 
+import mock
 
-class ReminderTests(APITestCase):
+from reminder.tasks import send_email_reminder
+
+
+class ReminderTasksTestCase(SimpleTestCase):
+
+    @mock.patch('reminder.tasks.send_mail')
+    @mock.patch('reminder.tasks.Reminder')
+    def test_send_email_notification(self, reminder_model_mock, email_send_mock):
+        reminder_mock = mock.Mock(spec=Reminder)
+        reminder_model_mock.objects.get.return_value = reminder_mock
+
+        send_email_reminder('test')
+
+        email_send_mock.assert_called_once_with(
+            subject=reminder_mock.text,
+            message=reminder_mock.text,
+            from_email=None,
+            recipient_list=[reminder_mock.email]
+        )
+
+
+class ReminderTestCase(APITestCase):
 
     def test_create_reminder(self):
         url = reverse('reminder-list')
@@ -44,4 +66,4 @@ class ReminderTests(APITestCase):
         url = reverse('reminder-detail', kwargs={'pk': reminder.pk})
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Reminder.objects.get().email, 'test@example.com')
+        self.assertEqual(response.data.keys(), ['email', 'text', 'delay', 'created'])
