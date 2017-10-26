@@ -20,10 +20,15 @@
 ## API URL structure
 
 `/api/boars/`
+
 `/api/boars/{id}/`
+
 `/api/boars/{board_id}/todos/?done=[true|false]`
+
 `/api/boars/{board_id}/todos/{id}/`
+
 `/api/reminders/`
+
 `/api/reminders/{id}/`
 
 
